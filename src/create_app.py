@@ -1,17 +1,14 @@
 from flask import Flask
-from .config import Config
-from .api.middleware import setup_middleware
-from .api.routes import register_routes
-from .infrastructure.databases import init_db
-from .app_logging import setup_logging
+from api.routes import register_routes
+from infrastructure.logging import setup_logging
+from infrastructure.databases.base import Base
+from infrastructure.databases.session import engine
 
 def create_app():
     app = Flask(__name__)
-    app.config.from_object(Config)
 
     setup_logging(app)
-    init_db(app)
-    setup_middleware(app)
+    Base.metadata.create_all(bind=engine)
     register_routes(app)
 
     return app

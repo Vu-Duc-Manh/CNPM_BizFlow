@@ -1,7 +1,6 @@
-from infrastructure.databases.mssql import init_mssql
-from infrastructure.models import course_register_model, todo_model, user_model, course_model, consultant_model, appointment_model, program_model, feedback_model,survey_model
+from .base import Base
+from .session import engine, SessionLocal
 
-def init_db(app):
-    init_mssql(app)
-    
-from infrastructure.databases.mssql import Base
+
+def init_db():
+    Base.metadata.create_all(bind=engine)

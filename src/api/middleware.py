@@ -34,3 +34,6 @@ def middleware(app):
     @app.route('/options', methods=['OPTIONS'])
     def options_route():
         return handle_options_request()
+
+def setup_middleware(app):
+    middleware(app)

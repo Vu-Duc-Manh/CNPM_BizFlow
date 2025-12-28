@@ -1,10 +1,12 @@
 from abc import ABC, abstractmethod
-from .todo import Todo
 from typing import List, Optional
+from .todo import Todo
+
 
 class ITodoRepository(ABC):
+
     @abstractmethod
-    def add(self, todo: Todo) -> Todo:
+    def list(self) -> List[Todo]:
         pass
 
     @abstractmethod
@@ -12,13 +14,13 @@ class ITodoRepository(ABC):
         pass
 
     @abstractmethod
-    def list(self) -> List[Todo]:
+    def add(self, todo: Todo) -> Todo:
         pass
 
     @abstractmethod
-    def update(self, todo: Todo) -> Todo:
+    def update(self, todo: Todo) -> Optional[Todo]:
         pass
 
     @abstractmethod
-    def delete(self, todo_id: int) -> None:
-        pass 
+    def delete(self, todo_id: int) -> bool:
+        pass
